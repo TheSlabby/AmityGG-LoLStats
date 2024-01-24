@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{username}}{% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    background-color: #161311;
+    color: white;
+  }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<!--background image-->
+<div>
+
+    
+    <div class="d-flex align-items-center justify-content-center p-5 text-center">
+        <div class="card rounded-9 p-3" style="width: 50%; background-color: hsla(0, 0%, 0%, 0.8); backdrop-filter: blur(15px);">
+            <h1>Welcome to AmityGG</h1>
+            <h4>League of Legends Stats</h4>
+            <h6><span style="color: silver">Total matches in database:</span> {{matches}} <span style="color: gray">(only using {{match_limit}})</h6>
+            <form class="d-flex" action="/user/" method="POST">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search for a user" aria-label="Search" name="username">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="d-flex p-2 align-items-center justify-content-center flex-column">
+        
+    </div>
+
+
+    <div class="d-flex justify-content-evenly p-4">
+        <div class="d-flex align-items-center justify-content-start flex-column text-center">
+            <h1>Player<br>Leaderboard</h1>
+            {% for name, kills, wins in data %}
+            <div class="card text-white text-center bg-dark mb-3 shadow-4" style="width: 600px">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text"><span style="color: silver">Wins:</span> {{wins}}</p>
+                    <p class="card-text"><span style="color: silver">Kills:</span> {{kills}}</p>
+                    <a href="/user/{{name}}" class="btn btn-primary stretched-link">View user</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="d-flex align-items-center text-center justify-content-start flex-column">
+            <h1>Champion<br>Leaderboard</h1>
+            {% for name, kills, wins in cData %}
+            <div class="card text-white text-center bg-dark mb-3 shadow-4" style="width: 300px">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/{{name}}.png"
+                            class="shadow-2-strong rounded-9 float-start" style="height: 70px" />
+                    <p class="card-text"><span style="color: silver">Wins:</span> {{wins}}</p>
+                    <p class="card-text"><span style="color: silver">Kills:</span> {{kills}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

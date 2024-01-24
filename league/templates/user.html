@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}{{username}}{% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    background-color: #0084ff;
+    background: linear-gradient(to left, #0b0b2b, #180627);
+    color: white;
+  }
+
+  a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  a:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: rgb(100%%, 90%, 90%);
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  #user-card {
+    width: 70%;
+    background-color: hsla(0, 0%, 100%, 0.5);
+    backdrop-filter: blur(15px);
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<!--background image-->
+<div>
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/League-of-Legends-Download-PNG.png" class="img-fluid rounded-9 float-start me-7"
+      style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; opacity: 0.7;" />
+
+  <!--show player data at the front of the page-->
+  <div class="d-flex flex-column justify-content-center align-items-center card shadow-4 rounded-9 mt-2" style="background-color: rgba(0, 0, 0, 0.514); width: 40%; margin: auto; backdrop-filter: blur(15px);">
+    
+
+    <h1 class="strong">{{actualName}}</h1>
+    <h4 class="strong" style="color: rgb(190, 190, 190)">Matches:<span style="color: white">{{fullMatches|length}}</span></h4>
+    <h4 class="strong" style="color: rgb(190, 190, 190)">KDA: <span style="color: white">{{totalKills}} / {{totalDeaths}} / {{totalAssists}} </span></h4>
+    <h4 class="strong" style="color: rgb(190, 190, 190)">Total CS: <span style="color: white">{{totalCs}} </span> </h4>
+    <h4 class="strong" style="color: rgb(190, 190, 190)">Win Rate: <span style="color: white">{{winRate}}%  </span></h4>
+    <h4 class="strong" style="color: rgb(190, 190, 190)">Total Time Played: <span style="color: white">{{timePlayed}}</span></h4>
+
+  </div>
+
+  <div class="h-100 d-flex flex-column-reverse justify-content-center align-items-center">
+
+    {% for match in matches %}
+    <div id="user-card" class="shadow-4 rounded-9 mb-2 mt-2 "
+      style="{% if not match.win %}background-color: hsla(0, 60%, 63%, 0.4){% else %}background-color: hsla(145, 60%, 61%, 0.4){% endif %}">
+
+      <div class="p-4 d-flex flex-row justify-content-between align-items-center"> <!-- main flexbox-->
+        <div class="me-3 h-100 d-flex flex-column justify-content-center align-items-center">
+          <h3 class="strong">{% if match.win %}Victory{% else %}Defeat{% endif %}</h3>
+          <h6 class="strong" style="color: rgb(190, 190, 190)">{{match.championName}}</h6>
+          <p style="color: rgb(190, 190, 190)" color:>{{match.length}}</p>
+          <p style="color: rgb(165, 165, 165)" color:>{{match.delta}}</p>
+        </div>
+
+        <div class="h-100 d-flex flex-column justify-content-center align-items-center me-4"> 
+          <div class="champion">
+            <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/{{match.championName}}.png"
+            class="shadow-2-strong rounded-9 float-start" style="height: 70px" />
+
+            {% comment %} TODO add summoner spells {% endcomment %}
+          </div>
+          <div>
+            <h4 class="strong" style="color: rgb(190, 190, 190); text-align: center"><span style="color: white">{{match.kills}} </span>
+              <span style="color: gray"> / </span> <span style="color: red"> {{match.deaths}} </span> <span style="color: gray"> / </span>
+              <span style="color: white"> {{match.assists}} </span></h5>
+
+              {% if match.firstBloodKill %}
+            <div class="badge badge-primary">First Blood</div>
+            {% endif %}
+
+            {% if match.firstTowerKill %}
+            <div class="badge badge-primary">First Tower</div>
+            {% endif %}
+
+            <h6 style="text-align: center" class="card-subtitle mb-2">{{match.cs}} CS</h6>
+
+
+            <!-- items-->
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item0}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />\
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item1}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item2}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item3}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item4}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item5}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+              <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{{match.item6}}.png"
+                class="img-fluid shadow-2-strong rounded-9 float-start me-1" style="height: 30px" />
+            </div>
+
+          </div>
+
+          
+
+    
+        </div>
+
+        <div name="participants" class="d-flex">
+          <ul style="list-style: none">
+            {% for p in match.participants %}
+              {% if p.teamId == 100 %}
+              <li style="font-size: 20px">
+                <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/{{p.championName}}.png" style="height: 20px">
+                <a href="/user/{{p.summonerName}}"> {{p.summonerName}} </a>
+              </li>
+              {% endif %}
+
+            {% endfor %}
+
+          </ul>
+          <ul style="list-style: none">
+            {% for p in match.participants %}
+              {% if p.teamId == 200 %}
+                <li style="font-size: 20px">
+                  <img src="http://ddragon.leagueoflegends.com/cdn/11.6.1/img/champion/{{p.championName}}.png" style="height: 20px">
+                  <a href="/user/{{p.summonerName}}"> {{p.summonerName}} </a>
+                </li>
+              {% endif %}
+
+            {% endfor %}
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
