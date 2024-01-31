@@ -4,12 +4,12 @@ import riotapi, discordhook, mongod # custom libraries
 
 UPDATE = True
 MATCHES_TO_UPDATE = 3
-HOOK_URL = open('.key', 'r').readlines()[1].strip()
+HOOK_URL = open('../.key', 'r').readlines()[1].strip()
 
 players = open('players.config', 'r').read().splitlines()
 
 if __name__ == '__main__':
-    mongo_manager = mongod.MongoDBManager(open('.key', 'r').readlines()[2].strip())
+    mongo_manager = mongod.MongoDBManager(open('../.key', 'r').readlines()[2].strip())
     conn = mongo_manager.get_connection()
     if not conn: sys.exit()
     # create data.json if it doesn't exist

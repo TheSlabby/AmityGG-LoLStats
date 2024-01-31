@@ -2,7 +2,7 @@ import data, discordhook, riotapi
 import time, requests, json
 
 players = open('players.config', 'r').read().splitlines()
-HOOK_URL = open('.key', 'r').readlines()[1].strip()
+HOOK_URL = open('../.key', 'r').readlines()[1].strip()
 
 if __name__ == '__main__':
     print('Getting report for players...')

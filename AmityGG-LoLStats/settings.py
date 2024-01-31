@@ -25,16 +25,16 @@ SECRET_KEY = 'django-insecure-x)lyhqcc#8_*3-&kr*-v9)x@xe32cr$50ly%6g0^s56ykz#jud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['home.slabby.tech', 'localhost', '192.168.1.142']
+ALLOWED_HOSTS = ['home.slabby.tech', '127.0.0.1', 'localhost', '192.168.1.142']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
+    # 'django.contrib.contenttypes',
+    # 'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'league',

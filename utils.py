@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-uri = open('.key', 'r').readlines()[0].strip()
+uri = open('.key', 'r').readlines()[2].strip()
 
 def get_db_handle():
     client = MongoClient(uri)
