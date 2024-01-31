@@ -18,7 +18,6 @@ from django.urls import path
 from league import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path("user/<str:username>/",views.user, name="user_page"),
     path('user/', views.userHome, name='user_home'),
     path('', views.home, name='home')

@@ -32,8 +32,8 @@ ALLOWED_HOSTS = ['home.slabby.tech', '127.0.0.1', 'localhost', '192.168.1.142']
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
     # 'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
